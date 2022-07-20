@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -72,6 +73,8 @@ namespace Bingo
                 }
             });
 
+            BallObject.Visibility = Visibility.Visible;
+            BallNumber.Visibility = Visibility.Visible;
 
             for (int n = 0; n < Frames && Animating == 1; ++n)
             {
@@ -84,6 +87,7 @@ namespace Bingo
 
             BallObject.Margin = BallObjectDefault;
             BallNumber.Margin = BallNumberDefault;
+            textRotation.Angle = 0;
 
             EndAnimation();
 
@@ -131,6 +135,8 @@ namespace Bingo
             PositionNumber.Right += VWWidth;
             BallObject.Margin = PositionBall;
             BallNumber.Margin = PositionNumber;
+            BallObject.Visibility = Visibility.Hidden;
+            BallNumber.Visibility = Visibility.Hidden;
         }
 
         private async Task Pause(double Frames)
@@ -141,10 +147,10 @@ namespace Bingo
 
         private async void BNum_Clicked(object sender, RoutedEventArgs e)
         {
-            Button Caller = sender as Button;
-            if (Caller == null)
+            if (!(sender is Button Caller))
             {
                 MessageBox.Show(new NullReferenceException().Message);
+                return;
             }
 
             if (Caller.Background == Brushes.Yellow)
@@ -162,28 +168,64 @@ namespace Bingo
             }
 
             CallStack.Push(Caller);
+            Handled = true;
         }
 
-        private void ResetBoard()
+        private async void ResetBoard()
         {
+            await StartAnimation();
+
             foreach (Button B in AllButtons)
             {
                 B.Background = DefaultColor;
                 B.FontSize = 40;
                 B.FontWeight = FontWeights.Bold;
             }
+
+
+            TextWin.Text = "";
+            TextWin.Visibility = Visibility.Hidden;
+            EndAnimation();
         }
 
-        private void B0_Click(object sender, RoutedEventArgs e)
+        private async void B0_Click(object sender, RoutedEventArgs e)
         {
-            ResetBoard();
-            MoveBallOffScreen(out _, out _);
-            CallStack.Clear();
+            if (!(sender is Button button))
+            {
+                MessageBox.Show(new NullReferenceException().Message);
+            }
+            else switch (button.Content.ToString())
+            {
+                case "Sure?":
+                    ResetBoard();
+                    MoveBallOffScreen(out _, out _);
+                    CallStack.Clear();
+                    button.Content = "Reset";
+                    return;
+                case "Reset":
+                {
+                    button.Content = "Sure?";
+                    for (int n = 0; n < 3000; ++n)
+                    {
+                        if (button.Content.ToString() == "Reset")
+                        {
+                            return;
+                        }
+                        await Task.Run(() =>
+                        {
+                            Thread.Sleep(1);
+                        });
+                    }
+                    button.Content = "Reset";
+                    return;
+                }
+            }
         }
 
         bool Animations = true;
+        private bool? Handled;
 
-        private void BUndo_Click(object sender, RoutedEventArgs e)
+        private async void BUndo_Click(object sender, RoutedEventArgs e)
         {
             if (CallStack.Count == 0)
             {
@@ -191,10 +233,24 @@ namespace Bingo
             }
 
             Animations = false;
-            BNum_Clicked(CallStack.Pop(), e);
+            Button ButtonToCall = CallStack.Pop();
+            Handled = false;
+
+            ButtonToCall.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+            await Task.Run(() =>
+            {
+                while (!Handled.Value)
+                {
+                }
+            });
+
+            Handled = null;
+
+            //BNum_Clicked(ButtonToCall, e);
             Animations = true;
 
-            CallStack.Pop();
+            _ = CallStack.Pop();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -204,18 +260,27 @@ namespace Bingo
 
         private async void BWin_Click(object sender, RoutedEventArgs e)
         {
+            BWin.IsEnabled = false;
             await StartAnimation();
 
             if (TextWin.Text == "")
             {
                 TextWin.Visibility = Visibility.Visible;
-                char[] Winner = "WE HAVE A\nWINNER".ToCharArray();
-                foreach (var a in Winner)
+                char[] Winner = $"WE HAVE A{Environment.NewLine}WINNER!".ToCharArray();
+                if (Animations)
                 {
-                    TextWin.Text += a;
-                    await Pause(10);
+                    foreach (char a in Winner)
+                    {
+                        if (Animating != 1)
+                        {
+                            break;
+                        }
+                        TextWin.Text += a;
+                        await Pause(10);
+                    }
                 }
 
+                TextWin.Text = new string(Winner);
             }
             else
             {
@@ -224,6 +289,10 @@ namespace Bingo
             }
 
             EndAnimation();
+
+            CallStack.Push(sender as Button);
+            BWin.IsEnabled = true;
+            Handled = true;
         }
     }
 }
