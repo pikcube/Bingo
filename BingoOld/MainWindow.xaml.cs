@@ -25,13 +25,7 @@ namespace Bingo
 
         private readonly Queue<Ticket> animatingQueue = new();
 
-        public Task StartAnimating()
-        {
-            ++AnimatingQueueLength;
-            return AnimatingQueueLength > 1 ? EnterQueue() : Task.CompletedTask;
-        }
-
-        private Task EnterQueue()
+        public Task EnterQueue()
         {
             ++AnimatingQueueLength;
             Ticket t = new();
@@ -47,17 +41,12 @@ namespace Bingo
 
         public void FinishAnimating()
         {
-            if (animatingQueue.Count > 0)
-            {
-                Ticket t = animatingQueue.Dequeue();
-                t.InLine = false;
-            }
-
-            --AnimatingQueueLength;
+            Ticket t = animatingQueue.Dequeue();
+            t.InLine = false;
         }
     }
-
-
+    
+    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -85,7 +74,7 @@ namespace Bingo
         private readonly List<Button> allButtons;
         private readonly Stack<Button> callStack = new();
         private readonly SolidColorBrush defaultColor = Brushes.AliceBlue;
-
+        
         private async Task BallAnimation()
         {
             await StartAnimation();
@@ -123,7 +112,7 @@ namespace Bingo
                 await p;
                 lock (animating)
                 {
-                    if (animating.AnimatingQueueLength > 1)
+                    if (animating.AnimatingQueueLength != 1)
                     {
                         break;
                     }
@@ -149,17 +138,22 @@ namespace Bingo
         {
             lock (animating)
             {
+                --animating.AnimatingQueueLength;
                 animating.FinishAnimating();
             }
         }
 
         private async Task StartAnimation()
         {
-            Task ticket;
-
+            Task ticket = Task.CompletedTask;
+            
             lock (animating)
             {
-                ticket = animating.StartAnimating();
+                ++animating.AnimatingQueueLength;
+                if (animating.AnimatingQueueLength > 1)
+                {
+                    ticket = animating.EnterQueue();
+                }
             }
 
             await ticket;
@@ -182,7 +176,7 @@ namespace Bingo
         private async Task Pause(double frames)
         {
             const int framesPerSecond = 120;
-            await Task.Run(() => Thread.Sleep((int)(1000 * frames / framesPerSecond)));
+            await Task.Run(() => Thread.Sleep((int) (1000 * frames / framesPerSecond)));
         }
 
         private async void BNum_Clicked(object sender, RoutedEventArgs e)
@@ -333,7 +327,7 @@ namespace Bingo
 
             EndAnimation();
 
-            callStack.Push((sender as Button)!);
+            callStack.Push(sender as Button);
             BWin.IsEnabled = true;
             handled = true;
         }
