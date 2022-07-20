@@ -33,7 +33,6 @@ namespace Bingo
 
         private Task EnterQueue()
         {
-            ++AnimatingQueueLength;
             Ticket t = new();
             animatingQueue.Enqueue(t);
             return Task.Run(() =>
