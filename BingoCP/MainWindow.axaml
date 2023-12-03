@@ -1,0 +1,117 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+        x:Class="BingoCP.MainWindow"
+        Title="BingoCP"
+        Background="White" Opened="Window_Loaded">
+    <Viewbox x:Name="Vw">
+        <Grid x:Name="Grid" Height="1080" Width="1920" 
+              RowDefinitions="20,*,*,*,*,*,*,6*,*,20"
+              ColumnDefinitions="20,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,20">
+            <Image x:Name="BallObject" 
+                   Grid.Row="7"
+                   Grid.Column="12"
+                   RenderTransform="{DynamicResource Transform1}" Grid.ColumnSpan="4" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   >
+            </Image>
+            <TextBlock x:Name="BallNumber" HorizontalAlignment="Center" TextWrapping="NoWrap" 
+                   Text="L-DF" VerticalAlignment="Center" 
+                   FontSize="170" Grid.Row="7"
+                   Grid.Column="12"
+                   Grid.ColumnSpan="4" Width="500"
+                   TextAlignment="Center" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="0" CenterX="250" CenterY="113"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Button x:Name="B1" Content="B-01" Grid.Column="1" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B2" Content="B-02" Grid.Column="2" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B3" Content="B-03" Grid.Column="3" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B4" Content="B-04" Grid.Column="4" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B5" Content="B-05" Grid.Column="5" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B6" Content="B-06" Grid.Column="6" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B7" Content="B-07" Grid.Column="7" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B8" Content="B-08" Grid.Column="8" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B9" Content="B-09" Grid.Column="9" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B10" Content="B-10" Grid.Column="10" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B11" Content="B-11" Grid.Column="11" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B12" Content="B-12" Grid.Column="12" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B13" Content="B-13" Grid.Column="13" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B14" Content="B-14" Grid.Column="14" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B15" Content="B-15" Grid.Column="15" Grid.Row="1" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B16" Content="I-16" Grid.Column="1" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B17" Content="I-17" Grid.Column="2" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B18" Content="I-18" Grid.Column="3" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B19" Content="I-19" Grid.Column="4" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B20" Content="I-20" Grid.Column="5" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B21" Content="I-21" Grid.Column="6" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B22" Content="I-22" Grid.Column="7" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B23" Content="I-23" Grid.Column="8" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B24" Content="I-24" Grid.Column="9" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B25" Content="I-25" Grid.Column="10" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B26" Content="I-26" Grid.Column="11" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B27" Content="I-27" Grid.Column="12" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B28" Content="I-28" Grid.Column="13" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B29" Content="I-29" Grid.Column="14" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B30" Content="I-30" Grid.Column="15" Grid.Row="2" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B31" Content="N-31" Grid.Column="1" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B32" Content="N-32" Grid.Column="2" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B33" Content="N-33" Grid.Column="3" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B34" Content="N-34" Grid.Column="4" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B35" Content="N-35" Grid.Column="5" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B36" Content="N-36" Grid.Column="6" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B37" Content="N-37" Grid.Column="7" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B38" Content="N-38" Grid.Column="8" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B39" Content="N-39" Grid.Column="9" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B40" Content="N-40" Grid.Column="10" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B41" Content="N-41" Grid.Column="11" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B42" Content="N-42" Grid.Column="12" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B43" Content="N-43" Grid.Column="13" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B44" Content="N-44" Grid.Column="14" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B45" Content="N-45" Grid.Column="15" Grid.Row="3" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B46" Content="G-46" Grid.Column="1" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B47" Content="G-47" Grid.Column="2" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B48" Content="G-48" Grid.Column="3" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B49" Content="G-49" Grid.Column="4" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B50" Content="G-50" Grid.Column="5" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B51" Content="G-51" Grid.Column="6" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B52" Content="G-52" Grid.Column="7" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B53" Content="G-53" Grid.Column="8" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B54" Content="G-54" Grid.Column="9" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B55" Content="G-55" Grid.Column="10" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B56" Content="G-56" Grid.Column="11" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B57" Content="G-57" Grid.Column="12" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B58" Content="G-58" Grid.Column="13" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B59" Content="G-59" Grid.Column="14" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B60" Content="G-60" Grid.Column="15" Grid.Row="4" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B61" Content="O-61" Grid.Column="1" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B62" Content="O-62" Grid.Column="2" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B63" Content="O-63" Grid.Column="3" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B64" Content="O-64" Grid.Column="4" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B65" Content="O-65" Grid.Column="5" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B66" Content="O-66" Grid.Column="6" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B67" Content="O-67" Grid.Column="7" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B68" Content="O-68" Grid.Column="8" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B69" Content="O-69" Grid.Column="9" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B70" Content="O-70" Grid.Column="10" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B71" Content="O-71" Grid.Column="11" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B72" Content="O-72" Grid.Column="12" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B73" Content="O-73" Grid.Column="13" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B74" Content="O-74" Grid.Column="14" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="B75" Content="O-75" Grid.Column="15" Grid.Row="5" FontSize="40" Click="BNum_Clicked"/>
+            <Button x:Name="BReset" Content="Reset" Grid.Column="2" Grid.Row="8" FontSize="40" Click="BReset_Click" Margin="10,0,-40,0"/>
+            <Button x:Name="BUndo" Content="Undo" Grid.Column="1" Grid.Row="8" FontSize="40" Click="BUndo_Click" Margin="0,0,0,0"/>
+            <Button x:Name="BWin" Content="End" Grid.Column="3" Grid.Row="8" FontSize="40" Click="BWin_Click" Margin="50,0,-50,0"/>
+            <TextBlock x:Name="TextWin" Text="" FontSize="175" TextAlignment="Center" 
+                       Grid.Column="2" Grid.ColumnSpan="13" Grid.Row="7"
+                       IsVisible="False"/>
+            <Button x:Name="BOpen" Content="Open" Grid.Column="15" Grid.Row="8" FontSize="40" Click="BOpen_OnClick"/>
+        </Grid>
+    </Viewbox>
+</Window>
